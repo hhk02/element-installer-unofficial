@@ -3,6 +3,7 @@
 
 answer=""
 
+# Check if are  you root.
 if [[ $EUID -eq 0 ]]; then
     echo "Welcome to Element Matrix Client Installer by hhk02"
     echo "WARNING! This is a unofficial installer"
@@ -15,17 +16,24 @@ if [[ $EUID -eq 0 ]]; then
     if [ -f ./element-*.deb ]; then
         echo "The file as downloaded before! using it."
     else
+    # Download Element deb package from official website
     wget https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.15_amd64.deb
     fi
     ar -x element-*.deb
     echo "Extracting Element Desktop"
+    
+    # Extract Element files in root dir
     tar xvf data.tar.xz --directory=/
+    # Make a symlink for run Element in the terminal.
+    ln -s /opt/Element/Element /usr/bin/element-desktop
+    # Update menu list apps
     echo "Updating applications list"
     update-desktop-database
     echo "Done"
     else
     echo "Canceled by user!"
     fi
+# If it's not root
 else
     echo "ERROR : Please use this script as ROOT!"
 fi
