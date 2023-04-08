@@ -1,4 +1,3 @@
-# element-desktop-unofficial-rpm
-Element Desktop in RPM
+# Element Installer in Bash
+by hhk02
 
-Converted using Alien
