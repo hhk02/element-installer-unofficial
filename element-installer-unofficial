@@ -25,7 +25,7 @@ if [[ $EUID -eq 0 ]]; then
     # Extract Element files in root dir
     tar xvf data.tar.xz --directory=/
     # Make a symlink for run Element in the terminal.
-    ln -s /opt/Element/Element /usr/bin/element-desktop
+    ln -s /opt/Element/element-desktop /usr/bin/element-desktop
     # Update menu list apps
     echo "Updating applications list"
     update-desktop-database
