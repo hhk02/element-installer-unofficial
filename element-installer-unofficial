@@ -1,0 +1,31 @@
+#!/bin/bash
+### UNIVERSAL ELEMENT MATRIX CLIENT INSTALLER BY HHK02 (ISAACFHL)
+
+answer=""
+
+if [[ $EUID -eq 0 ]]; then
+    echo "Welcome to Element Matrix Client Installer by hhk02"
+    echo "WARNING! This is a unofficial installer"
+    echo "I created this for install Element Desktop if your distro doesn't have a package for install it."
+
+    read -p "Are you sure install Element Desktop ?"
+
+    if [[ $answer -eq "yes" ]]; then
+    echo "Downloading Element....."
+    if [ -f ./element-*.deb ]; then
+        echo "The file as downloaded before! using it."
+    else
+    wget https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.15_amd64.deb
+    fi
+    ar -x element-*.deb
+    echo "Extracting Element Desktop"
+    tar xvf data.tar.xz --directory=/
+    echo "Updating applications list"
+    update-desktop-database
+    echo "Done"
+    else
+    echo "Canceled by user!"
+    fi
+else
+    echo "ERROR : Please use this script as ROOT!"
+fi
