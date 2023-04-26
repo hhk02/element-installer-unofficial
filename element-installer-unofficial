@@ -8,20 +8,26 @@ if [[ $EUID -eq 0 ]]; then
     echo "Welcome to Element Matrix Client Installer by hhk02"
     echo "WARNING! This is a unofficial installer"
     echo "I created this for install Element Desktop if your distro doesn't have a package for install it."
+    read -r -p "Are you sure install Element Desktop ?"
 
-    read -p "Are you sure install Element Desktop ?"
-
-    if [[ $answer -eq "yes" ]]; then
+    if [[ $answer = "yes" ]]; then
     echo "Downloading Element....."
-    if [ -f ./element-*.deb ]; then
-        echo "The file as downloaded before! using it."
-    else
     # Download Element deb package from official website
-    wget https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.15_amd64.deb
+    if [ -f /usr/bin/wget ]; then
+        if [ -f 'element-desktop_1.11.15_amd64.deb' ]; then
+            echo "Skip download.... file alredy exists!"
+        else
+            wget https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.15_amd64.deb
+        fi
+    else
+        dnf install wget -y
     fi
-    ar -x element-*.deb
+    if [ -f /usr/bin/ar ]; then
+        ar -x element-*.deb
+    else
+        dnf install binutils -y
+    fi
     echo "Extracting Element Desktop"
-    
     # Extract Element files in root dir
     tar xvf data.tar.xz --directory=/
     # Make a symlink for run Element in the terminal.
