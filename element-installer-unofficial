@@ -8,9 +8,9 @@ if [[ $EUID -eq 0 ]]; then
     echo "Welcome to Element Matrix Client Installer by hhk02"
     echo "WARNING! This is a unofficial installer"
     echo "I created this for install Element Desktop if your distro doesn't have a package for install it."
-    read -r -p "Are you sure install Element Desktop ?"
+    read -r -p "Are you sure install Element Desktop ?" answer
 
-    if [[ $answer = "yes" ]]; then
+    if [ $answer = "yes" ]; then
     echo "Downloading Element....."
     # Download Element deb package from official website
     if [ -f /usr/bin/wget ]; then
@@ -23,10 +23,11 @@ if [[ $EUID -eq 0 ]]; then
         dnf install wget -y
     fi
     if [ -f /usr/bin/ar ]; then
-        ar -x element-*.deb
+        echo "ar command found"
     else
         dnf install binutils -y
     fi
+    ar -x element-*.deb
     echo "Extracting Element Desktop"
     # Extract Element files in root dir
     tar xvf data.tar.xz --directory=/
