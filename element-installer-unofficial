@@ -32,8 +32,9 @@ if [[ $EUID -eq 0 ]]; then
     fi
     echo "Extracting Element Desktop"
     # Extract Element files in root dir
-    mkdir -p /opt/Element
-    tar xvf element-desktop.tar.gz --directory=/opt/Element
+    tar xvf element-desktop.tar.gz
+    mv element-desktop-* Element
+    mv Element /opt
     # Make a symlink for run Element in the terminal.
     ln -s /opt/Element/element-desktop /usr/bin/element-desktop
     # Update menu list apps
