@@ -17,7 +17,7 @@ if [[ $EUID -eq 0 ]]; then
         if [ -f 'element-desktop_1.11.15_amd64.deb' ]; then
             echo "Skip download.... file alredy exists!"
         else
-            wget https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.15_amd64.deb
+            wget https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop.tar.gz
         fi
     else
         dnf install wget -y
