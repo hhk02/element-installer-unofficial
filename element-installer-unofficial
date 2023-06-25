@@ -27,7 +27,7 @@ if [[ $EUID -eq 0 ]]; then
             dnf install wget -y
         fi
         if [ -f /usr/bin/pacman ]; then
-            pacman -S wget --no-confirm
+            pacman -S wget --noconfirm
         fi
     fi
     echo "Extracting Element Desktop"
