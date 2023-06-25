@@ -14,23 +14,26 @@ if [[ $EUID -eq 0 ]]; then
     echo "Downloading Element....."
     # Download Element deb package from official website
     if [ -f /usr/bin/wget ]; then
-        if [ -f 'element-desktop_1.11.15_amd64.deb' ]; then
+        if [ -f 'element-desktop.tar.gz' ]; then
             echo "Skip download.... file alredy exists!"
         else
             wget https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop.tar.gz
         fi
     else
-        dnf install wget -y
+        if [ -f /usr/bin/apt ]; then
+            apt install wget -y
+        fi
+        if [ -f /usr/bin/dnf ]; then
+            dnf install wget -y
+        fi
+        if [ -f /usr/bin/pacman ]; then
+            pacman -S wget --no-confirm
+        fi
     fi
-    if [ -f /usr/bin/ar ]; then
-        echo "ar command found"
-    else
-        dnf install binutils -y
-    fi
-    ar -x element-*.deb
     echo "Extracting Element Desktop"
     # Extract Element files in root dir
-    tar xvf data.tar.xz --directory=/
+    mkdir -p /opt/Element
+    tar xvf element-desktop.tar.gz --directory=/opt/Element
     # Make a symlink for run Element in the terminal.
     ln -s /opt/Element/element-desktop /usr/bin/element-desktop
     # Update menu list apps
